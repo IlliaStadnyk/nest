@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { db, Product } from '../db';
 import { v4 as uuidv4 } from 'uuid';
 
-
 @Injectable()
 export class ProductsService {
   public getAll(): Product[] {
@@ -20,5 +19,13 @@ export class ProductsService {
     const newProduct = { ...productData, id: uuidv4() };
     db.products.push(newProduct);
     return newProduct;
+  }
+  public updateById(id: Product['id'], productData: Omit<Product, 'id'>): void {
+    db.products = db.products.map((p) => {
+      if (p.id === id) {
+        return { ...p, ...productData };
+      }
+      return p;
+    });
   }
 }
