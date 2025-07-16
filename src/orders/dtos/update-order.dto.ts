@@ -8,6 +8,7 @@ export class UpdateOrderDto {
 
   @IsNotEmpty()
   @IsUUID()
+  @IsString()
   productId: string;
 
   @IsNotEmpty()

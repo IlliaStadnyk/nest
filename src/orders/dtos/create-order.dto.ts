@@ -8,6 +8,7 @@ export class CreateOrderDto {
 
   @IsNotEmpty()
   @IsUUID()
+  @IsString()
   productId: string;
 
   @IsNotEmpty()
