@@ -15,19 +15,23 @@ export class OrdersService {
       include: { product: true },
     });
   }
-  public deleteById(id: Order['id']): Promise<Order> {
-    return this.prismaService.order.delete({ where: { id: id } });
+  public deleteById(id: Order['id']): Promise<null> {
+    this.prismaService.order.delete({ where: { id: id } });
+    return null;
   }
   public async create(
     orderData: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>,
   ): Promise<Order> {
-    const { productId, ...otherData } = orderData;
+    const { productId, clientId, ...otherData } = orderData;
     try {
       return await this.prismaService.order.create({
         data: {
           ...otherData,
           product: {
             connect: { id: productId },
+          },
+          client: {
+            connect: { id: clientId },
           },
         },
       });
