@@ -15,42 +15,4 @@ export class ProductsService {
       where: { id },
     });
   }
-
-  public deleteById(id: Product['id']): Promise<Product> {
-    return this.prismaService.product.delete({
-      where: { id },
-    });
-  }
-  public create(
-    productData: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>,
-  ): Promise<Product> {
-    return this.prismaService.product.create({
-      data: productData,
-    });
-  }
-  public updateById(
-    id: Product['id'],
-    productData: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>,
-  ): Promise<Product> {
-    return this.prismaService.product.update({
-      where: { id },
-      data: productData,
-    });
-  }
-  public async getAllExtended(): Promise<Product[]> {
-    try {
-      return await this.prismaService.product.findMany({
-        include: { orders: true },
-      });
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  public getExtendedById(id: Product['id']): Promise<Product | null> {
-    return this.prismaService.product.findUnique({
-      where: { id },
-      include: { orders: true },
-    });
-  }
 }

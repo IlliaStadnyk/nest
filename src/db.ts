@@ -8,7 +8,6 @@ export interface Product {
 export interface Order {
   id: string;
   clientId: string;
-  productId: string;
 }
 
 export interface Client {
