@@ -18,8 +18,7 @@ import { CarouselModule } from './carousel/carousel.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', 'public'),
-      serveRoot: '/static',
+      rootPath: join(__dirname, '..', 'client', 'build'),
     }),
     ProductsModule,
     OrdersModule,
