@@ -1,12 +1,9 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -15,33 +12,34 @@ model Order {
 
   client    Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
   clientId  String?
-  address String?
+  address   String?
 
   orderProduct OrderProduct[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Client {
-  id String @id @default(uuid())
-  name String
-  phone String @unique
-  orders Order[]
+  id        String   @id @default(uuid())
+  name      String
+  phone     String   @unique
+  orders    Order[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
 model Carousel {
-  id String @id @default(uuid())
+  id   String @id @default(uuid())
   name String
 }
 
 model Product {
   id          String    @id @default(uuid())
-  title       String   @default("")
+  title       String    @default("")
   price       Int
   shortDesc   String    @map("short_desc") @default("")
-  description String    @db.Text 
+  description String
   imageMain   String?   @map("image_main")
   imageDesc   String?   @map("image_desc")
   createdAt   DateTime  @default(now())
@@ -51,13 +49,13 @@ model Product {
 }
 
 model OrderProduct {
-  id          String  @id @default(uuid())
-  product     Product @relation(fields: [productId], references: [id])
-  productId   String  @map("product_id")
-  order       Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  orderId     String  @map("order_id")
-  quantity    Int
-  orderDescription String? @map("order_description")
+  id               String   @id @default(uuid())
+  product          Product  @relation(fields: [productId], references: [id])
+  productId        String   @map("product_id")
+  order            Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId          String   @map("order_id")
+  quantity         Int
+  orderDescription String?  @map("order_description")
 
   @@map("order_product")
 }
