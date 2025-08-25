@@ -12,12 +12,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalInterceptors(new LoggerInterceptor());
   app.setGlobalPrefix('api');
-  console.log(join(__dirname, '..', '..', 'public', 'uploads'));
 
   app.useStaticAssets(join(__dirname, '..', '..', 'public', 'uploads'), {
     prefix: '/uploads/',
   });
-
   await app.enableShutdownHooks();
 
   await app.listen(8000);

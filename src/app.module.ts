@@ -11,9 +11,21 @@ import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { OrderProductModule } from './order-product/order-product.module';
 import { ClientsModule } from './clients/clients.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { CarouselModule } from './carousel/carousel.module';
 
 @Module({
-  imports: [ProductsModule, OrdersModule, OrderProductModule, ClientsModule],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'client', 'build'),
+    }),
+    ProductsModule,
+    OrdersModule,
+    OrderProductModule,
+    ClientsModule,
+    CarouselModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

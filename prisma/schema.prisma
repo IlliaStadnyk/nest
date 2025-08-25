@@ -22,12 +22,6 @@ model Order {
   updatedAt DateTime @updatedAt
 }
 
-// model Category {
-//   id      String    @id @default(uuid())
-//   name    String
-//   product Product[]
-// }
-
 model Client {
   id String @id @default(uuid())
   name String
@@ -37,12 +31,17 @@ model Client {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+model Carousel {
+  id String @id @default(uuid())
+  name String
+}
 
 model Product {
   id          String    @id @default(uuid())
   title       String   @default("")
   price       Int
-  description String
+  shortDesc   String    @map("short_desc") @default("")
+  description String    @db.Text 
   imageMain   String?   @map("image_main")
   imageDesc   String?   @map("image_desc")
   createdAt   DateTime  @default(now())

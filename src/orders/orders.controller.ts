@@ -1,16 +1,5 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  NotFoundException,
-  Param,
-  ParseUUIDPipe,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { UpdateOrderDto } from './dtos/update-order.dto';
 import { CreateOrderDto } from './dtos/create-order.dto';
 
 @Controller('orders')
