@@ -19,6 +19,7 @@ import { CarouselModule } from './carousel/carousel.module';
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'client', 'build'),
+      exclude: ['/api*'],
     }),
     ProductsModule,
     OrdersModule,
